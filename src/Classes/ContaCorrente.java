@@ -1,18 +1,18 @@
 package Classes;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import Interfaces.ContaPagamentos;
 
 public final class ContaCorrente extends ContaBancaria implements ContaPagamentos {
-	private final Calendar diaCobranca;
+	private final LocalDate diaCobranca;
 
-	public ContaCorrente(Cliente cliente, String numero, double saldo, Calendar diaCobranca) {
+	public ContaCorrente(Cliente cliente, String numero, double saldo, LocalDate diaCobranca) {
 		super(cliente, numero, saldo);
 		this.diaCobranca = diaCobranca;
 	}
 	
-	public Calendar getDiaCobranca() {
+	public LocalDate getDiaCobranca() {
 		return diaCobranca;
 	}
 

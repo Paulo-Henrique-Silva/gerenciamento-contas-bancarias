@@ -1,26 +1,26 @@
 package Classes;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import Interfaces.ContaPagamentos;
 import Interfaces.ContaRentavel;
 
 public final class ContaCorrenteEPoupanca extends ContaBancaria implements ContaRentavel, ContaPagamentos {
-	private final Calendar diaCobranca;
-	private final Calendar diaRendimento;
+	private final LocalDate diaCobranca;
+	private final LocalDate diaRendimento;
 	
-	public ContaCorrenteEPoupanca(Cliente cliente, String numero, double saldo, Calendar diaCobranca,
-			Calendar diaRendimento) {
+	public ContaCorrenteEPoupanca(Cliente cliente, String numero, double saldo, LocalDate diaCobranca,
+			LocalDate diaRendimento) {
 		super(cliente, numero, saldo);
 		this.diaCobranca = diaCobranca;
 		this.diaRendimento = diaRendimento;
 	}
 
-	public Calendar getDiaCobranca() {
+	public LocalDate getDiaCobranca() {
 		return diaCobranca;
 	}
 
-	public Calendar getDiaRendimento() {
+	public LocalDate getDiaRendimento() {
 		return diaRendimento;
 	}
 

@@ -1,18 +1,17 @@
 package Classes;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import Enums.Sexo;
 
 public final class Cliente {
 	private String nome;
-	private Calendar dataNascimento;
+	private LocalDate dataNascimento;
 	private String email;
 	private String telefone;
 	private Sexo sexo;
 	
-	public Cliente(String nome, Calendar dataNascimento, String email, String telefone, Sexo sexo) {
-		super();
+	public Cliente(String nome, LocalDate dataNascimento, String email, String telefone, Sexo sexo) {
 		this.nome = nome;
 		this.dataNascimento = dataNascimento;
 		this.email = email;
@@ -24,7 +23,7 @@ public final class Cliente {
 		return nome;
 	}
 
-	public Calendar getDataNascimento() {
+	public LocalDate getDataNascimento() {
 		return dataNascimento;
 	}
 
