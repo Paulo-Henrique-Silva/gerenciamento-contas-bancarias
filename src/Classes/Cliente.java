@@ -1,8 +1,10 @@
 package Classes;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import Enums.Sexo;
+import Interfaces.Constantes;
 
 public final class Cliente {
 	private String nome;
@@ -38,5 +40,17 @@ public final class Cliente {
 	public Sexo getSexo() {
 		return sexo;
 	}
-	
+
+	@Override
+	public String toString() {
+		String s = "";
+		
+		s += "\nNome: " + nome;
+		s += "\nData de nascimento: " + dataNascimento.format(DateTimeFormatter.ofPattern(Constantes.FORMATO_DATA));
+		s += "\nEmail: " + email;
+		s += "\nTelefone: " + telefone;
+		s += "\nSexo: " + sexo.toString();
+		
+		return s;
+	}
 }

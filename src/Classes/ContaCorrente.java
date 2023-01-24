@@ -1,18 +1,16 @@
 package Classes;
 
-import java.time.LocalDate;
-
 import Interfaces.ContaPagamentos;
 
 public final class ContaCorrente extends ContaBancaria implements ContaPagamentos {
-	private final LocalDate diaCobranca;
+	private final int diaCobranca;
 
-	public ContaCorrente(Cliente cliente, String numero, double saldo, LocalDate diaCobranca) {
-		super(cliente, numero, saldo);
+	public ContaCorrente(Cliente cliente, String numero, int diaCobranca) {
+		super(cliente, numero);
 		this.diaCobranca = diaCobranca;
 	}
 	
-	public LocalDate getDiaCobranca() {
+	public int getDiaCobranca() {
 		return diaCobranca;
 	}
 
@@ -25,4 +23,17 @@ public final class ContaCorrente extends ContaBancaria implements ContaPagamento
 	public void cobrarTaxa() {
 		
 	}
+
+	@Override
+	public String toString() {
+		String s = "";
+		
+		s += "\nCliente: " + getCliente().getNome();
+		s += "\nNúmero conta: " + getNumero();
+		s += "\nSaldo: R$" + getSaldo();
+		s += "\nDia Cobrança: " + diaCobranca;
+		
+		return s;
+	}
+	
 }

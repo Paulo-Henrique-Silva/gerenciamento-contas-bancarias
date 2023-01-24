@@ -3,12 +3,11 @@ package Classes;
 public abstract class ContaBancaria {
 	private final Cliente cliente;
 	private final String numero;
-	private double saldo;
+	private double saldo = 0;
 	
-	public ContaBancaria(Cliente cliente, String numero, double saldo) {
+	public ContaBancaria(Cliente cliente, String numero) {
 		this.cliente = cliente;
 		this.numero = numero;
-		this.saldo = saldo;
 	}
 
 	public Cliente getCliente() {
