@@ -30,5 +30,4 @@ public final class ContaPoupanca extends ContaBancaria implements ContaRentavel 
 		
 		return s;
 	}
-	
 }

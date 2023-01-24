@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -46,12 +47,24 @@ public class Main {
 			}
 			
 			switch (opcaoMenuPrincipal) {
+				case 1:
+					entrar();
+					break;
+					
 				case 2:
 					criarConta();
 					break;
 					
 				case 3:
 					cadastrarCliente();
+					break;
+					
+				case 4:
+					deletarConta();
+					break;
+					
+				case 5:
+					deletarCliente();
 					break;
 					
 				case 6:
@@ -101,7 +114,7 @@ public class Main {
 			int numeroCliente = scanner.nextInt();
 			
 			if (numeroCliente <= 0 || numeroCliente > clientes.size()) {
-				throw new Exception();
+				throw new InputMismatchException();
 			}
 			
 			System.out.println("Digite o número da conta: ");
@@ -131,7 +144,7 @@ public class Main {
 				contas.add(new ContaCorrenteEPoupanca(clientes.get(numeroCliente - 1), numeroConta, LocalDate.now().getDayOfMonth(), LocalDate.now().getDayOfMonth()));
 			}
 			else {
-				throw new Exception();
+				throw new InputMismatchException();
 			}
 			
 			System.out.println("Conta adicionada com sucesso!");
@@ -172,7 +185,7 @@ public class Main {
 				sexo = Sexo.Feminino;
 			}
 			else {
-				throw new Exception(); //significa que digitou algo incorretamente
+				throw new InputMismatchException(); //significa que digitou algo incorretamente
 			}
 			
 			DateTimeFormatter formatter = DateTimeFormatter.ofPattern(Constantes.FORMATO_DATA); //coloca no formato dd/mm/yyyy
@@ -183,6 +196,7 @@ public class Main {
 	        LocalDate dataNascimento = LocalDate.parse(dataNascimentoString, formatter);
 			
 			clientes.add(new Cliente(nome, dataNascimento, email, telefone, sexo));
+			
 			System.out.println("Cliente cadastrado com sucesso!");
 		} catch (Exception ex) {
 			System.out.println("Entrada inválida!");
@@ -190,10 +204,71 @@ public class Main {
 	}
 	
 	public static void deletarConta() {
+		if (contas.isEmpty()) {
+			System.out.println("Nenhuma conta cadastrada.");
+			return;
+		}
 		
+		try {
+			for (int i = 0; i < contas.size(); i++) {
+				ContaBancaria conta = contas.get(i);
+				String tipoConta;
+				
+				if (conta instanceof ContaPoupanca) {
+					tipoConta = "Conta Poupança";
+				}
+				else if (conta instanceof ContaCorrente) {
+					tipoConta = "Conta Corrente";
+				}
+				else if (conta instanceof ContaCorrenteEPoupanca) {
+					tipoConta = "Conta Poupança e Corrente";
+				}
+				else {
+					tipoConta = "Outra";
+				}
+				
+				System.out.println(String.format("%d - %s - %s - %s", i + 1, conta.getNumero(), conta.getCliente().getNome(), tipoConta));
+			}
+			
+			System.out.println("Selecione uma conta: ");
+			int indiceConta = scanner.nextInt();
+			
+			if (indiceConta <= 0 || indiceConta > contas.size()) {
+				throw new InputMismatchException();
+			}
+			
+			contas.remove(indiceConta - 1);
+		
+			System.out.println("Conta removida.");
+		} catch (Exception ex) {
+			System.out.println("Entrada inválida!");
+		}
 	}
 	
 	public static void deletarCliente() {
+		if (clientes.isEmpty()) {
+			System.out.println("Nenhum cliente cadastrado.");
+			return;
+		}
+		
+		try {
+			for (int i = 0; i < clientes.size(); i++) {
+				System.out.println(String.format("%d - %s", i + 1, clientes.get(i).getNome()));
+			}
+			
+			System.out.println("Selecione um cliente: ");
+			int numeroCliente = scanner.nextInt();
+			
+			if (numeroCliente <= 0 || numeroCliente > clientes.size()) {
+				throw new InputMismatchException();
+			}
+			
+			clientes.remove(numeroCliente - 1);
+		
+			System.out.println("Cliente removido.");
+		} catch (Exception ex) {
+			System.out.println("Entrada inválida!");
+		}
 		
 	}
 	
