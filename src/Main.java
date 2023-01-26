@@ -38,6 +38,7 @@ public class Main {
 			System.out.println("[6] - Ver contas");
 			System.out.println("[7] - Ver clientes");
 			System.out.println("[8] - Sair do aplicativo\n");
+			
 			System.out.println("Digite a operação: ");
 			
 			try {
@@ -92,7 +93,35 @@ public class Main {
 	
 	
 	public static void entrar() {
+		if (contas.isEmpty()) {
+			System.out.println("Nenhuma conta cadastrada.");
+			return;
+		}
 		
+		try {
+			System.out.println("Digite o número da conta: ");
+			String numeroConta = scanner.next();
+			
+			for (ContaBancaria conta : contas) {
+				if (conta.getNumero().equals(numeroConta)) {
+					if (conta instanceof ContaPoupanca) {
+						MenuContaPoupanca.mostraMenu(conta);
+					}
+					else if (conta instanceof ContaCorrente) {
+					}
+					
+					else if (conta instanceof ContaCorrenteEPoupanca) {
+						
+					}
+					
+					return;
+				}
+			}
+			
+			System.out.println("Não existe uma conta cadastrada com esse número.");
+		} catch (Exception e) {
+			System.out.println("Entrada inválida!");
+		}
 	}
 	
 	public static void criarConta() {
@@ -106,6 +135,17 @@ public class Main {
 		}
 		
 		try {
+			System.out.println("Digite o número da conta: ");
+			String numeroConta = scanner.next();
+			
+			for (ContaBancaria conta : contas) {
+				if (conta.getNumero().equals(numeroConta)) {
+					System.out.println("Este número de conta já está sendo utilizado.");
+					return;
+				}
+			}
+			
+			//mostra clientes
 			for (int i = 0; i < clientes.size(); i++) {
 				System.out.println(String.format("%d - %s", i + 1, clientes.get(i).getNome()));
 			}
@@ -115,16 +155,6 @@ public class Main {
 			
 			if (numeroCliente <= 0 || numeroCliente > clientes.size()) {
 				throw new InputMismatchException();
-			}
-			
-			System.out.println("Digite o número da conta: ");
-			String numeroConta = scanner.next();
-			
-			for (ContaBancaria conta : contas) {
-				if (conta.getNumero().equals(numeroConta)) {
-					System.out.println("Este número de conta já está sendo utilizado.");
-					return;
-				}
 			}
 			
 			System.out.println("Selecione o tipo de conta: ");
