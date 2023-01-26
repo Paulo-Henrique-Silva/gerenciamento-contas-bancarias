@@ -108,11 +108,11 @@ public class Main {
 						MenuContaPoupanca.mostraMenu(conta);
 					}
 					else if (conta instanceof ContaCorrente) {
-						
+						MenuContaCorrente.mostraMenu(conta);
 					}
 					
 					else if (conta instanceof ContaCorrenteEPoupanca) {
-						
+						MenuContaCorrenteEPoupanca.mostraMenu(conta);
 					}
 					
 					return;

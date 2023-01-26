@@ -1,8 +1,10 @@
 package Interfaces;
 
+import Excecoes.DiaInvalido;
+import Excecoes.ValorTransacaoInvalido;
+
 public interface ContaPagamentos {
 	double TAXA_MENSAL = 13.25;
 	
-	void transferir(double valor);
-	void cobrarTaxa();
+	void cobrarTaxa() throws DiaInvalido, ValorTransacaoInvalido;
 }

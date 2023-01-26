@@ -2,7 +2,7 @@ package Classes;
 
 import java.time.LocalDate;
 
-import Excecoes.DiaRendimentoInvalido;
+import Excecoes.DiaInvalido;
 import Excecoes.ValorTransacaoInvalido;
 import Interfaces.ContaRentavel;
 
@@ -19,11 +19,11 @@ public final class ContaPoupanca extends ContaBancaria implements ContaRentavel 
 	}
 
 	@Override
-	public void render() throws DiaRendimentoInvalido, ValorTransacaoInvalido {
+	public void render() throws DiaInvalido, ValorTransacaoInvalido {
 		int diaAtual = LocalDate.now().getDayOfMonth();
 		
 		if (diaAtual != diaRendimento) {
-			throw new DiaRendimentoInvalido(String.format("O dia atual '%d' não condiz com o dia de rendimento '%d'", diaAtual, diaRendimento));
+			throw new DiaInvalido(String.format("O dia atual '%d' não condiz com o dia de rendimento '%d'", diaAtual, diaRendimento));
 		}
 		
 		double rendimento = getSaldo() * PORCENTAGEM_RENDIMENTO_MENSAL / 100;

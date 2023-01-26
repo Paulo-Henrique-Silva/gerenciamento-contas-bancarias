@@ -1,5 +1,9 @@
 package Classes;
 
+import java.time.LocalDate;
+
+import Excecoes.DiaInvalido;
+import Excecoes.ValorTransacaoInvalido;
 import Interfaces.ContaPagamentos;
 
 public final class ContaCorrente extends ContaBancaria implements ContaPagamentos {
@@ -15,13 +19,14 @@ public final class ContaCorrente extends ContaBancaria implements ContaPagamento
 	}
 
 	@Override
-	public void transferir(double valor) {
+	public void cobrarTaxa() throws DiaInvalido, ValorTransacaoInvalido {
+		int diaAtual = LocalDate.now().getDayOfMonth();
 		
-	}
-
-	@Override
-	public void cobrarTaxa() {
+		if (diaAtual != diaCobranca) {
+			throw new DiaInvalido(String.format("O dia atual '%d' não condiz com o dia de cobrança '%d'", diaAtual, diaCobranca));
+		}
 		
+		retirar(TAXA_MENSAL);
 	}
 
 	@Override
